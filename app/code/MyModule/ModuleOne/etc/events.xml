@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="mymodule_moduleone_controller_action_predispatch_observer" instance="MyModule\ModuleOne\Observer\Predispatch" disabled="false" shared="false"/>
+    </event>
+    <event name="controller_front_send_response_before">
+        <observer name="MyModule_ModuleOne_capture_html_output" instance="MyModule\ModuleOne\Observer\CaptureHtmlOutputObserver" disabled="false" shared="false"/>
+    </event>
+</config>

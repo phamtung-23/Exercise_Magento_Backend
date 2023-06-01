@@ -1,0 +1,22 @@
+<config>
+  <type name="Magento\Catalog\Model\Product">
+    <plugin name="change_product" type="MyModule\ModuleOne\Plugin\Product" sortOrder="1" disabled="false"/>
+  </type>
+
+
+  <type name="Magento\Theme\Block\Html\Footer">
+    <plugin name="change_footer" type="MyModule\ModuleOne\Plugin\Footer" sortOrder="1" disabled="false"/>
+  </type>
+
+
+ <type name="Magento\Theme\Block\Html\Breadcrumbs">
+    <plugin name="creadcrumbs_plugin" type="MyModule\ModuleOne\Plugin\BreadcrumbsPlugin" sortOrder="1" disabled="false"/>
+  </type>
+
+
+  <!-- <type name="MyModule\ModuleOne\Observer\ControllerActionPredispatchObserver">
+    <arguments>
+        <argument name="logger" xsi:type="object">Magento\Framework\Logger\Monolog</argument>
+    </arguments> -->
+  <!-- </type> -->
+</config>
