@@ -1,0 +1,9 @@
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="unit4ex1" frontName="unit4ex1">
+            <module name="Unit4_Ex1"/>
+        </route>
+    </router>
+</config>
