@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page Layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+     <head>
+          <title>Tình Hình thời tiết</title>
+          <!-- <base href="/"/> -->
+          <!-- <css src="MyModule_CustomTemplate::css/style.css"/> -->
+          <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"  src_type="url"/>
+          <script src="MyModule_CustomTemplate::js/jquery.simpleWeather.min.js"/> -->
+          
+     </head>
+     <body>
+          <referenceBlock name="content">
+               <block class="MyModule\CustomTemplate\Block\Weather" 
+                    name="mymodule.customtemplate" 
+                    template="MyModule_CustomTemplate::weather.phtml">
+               </block>
+          </referenceBlock>
+     </body>
+</page>

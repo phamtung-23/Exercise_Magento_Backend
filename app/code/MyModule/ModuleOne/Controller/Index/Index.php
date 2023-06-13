@@ -48,7 +48,7 @@ class Index extends Action
 			return $this->_pageFactory->create();
 		}
 		else{
-			$urlRewriteModel = $this->_urlRewriteFactory->create();
+			$urlRewriteModel = $this->_urlRewriteFactory->create();~
 			/* set current store id */
 			$urlRewriteModel->setStoreId(1);
 			/* this url is not created by system so set as 0 */

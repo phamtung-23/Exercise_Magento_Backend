@@ -13,7 +13,9 @@
     <plugin name="creadcrumbs_plugin" type="MyModule\ModuleOne\Plugin\BreadcrumbsPlugin" sortOrder="1" disabled="false"/>
   </type>
 
-
+ <type name="Magento\Catalog\Block\Product\View">
+    <plugin name="logged-layout-xml" type="MyModule\ModuleOne\Plugin\LoggedLayoutXML" sortOrder="1" disabled="false"/>
+  </type>
   <!-- <type name="MyModule\ModuleOne\Observer\ControllerActionPredispatchObserver">
     <arguments>
         <argument name="logger" xsi:type="object">Magento\Framework\Logger\Monolog</argument>

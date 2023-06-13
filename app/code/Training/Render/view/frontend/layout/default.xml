@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content.top">
+            <!-- add block custom -->
+            <block class="Training\Render\Block\BlockContentTop"
+                   name="custom.block.content.top"
+                   template="Training_Render::custom_content_top.phtml">
+                <arguments>
+                    <argument name="background_color" xsi:type="string">lightskyblue</argument>
+                </arguments>       
+            </block>
+            <!-- add link new page -->
+            <block class="Magento\Framework\View\Element\Html\Link\Current" 
+                    name="custom.page.link" 
+                    template="Training_Render::link_new_page.phtml">
+                <arguments>
+                    <argument name="label" xsi:type="string">New One Page</argument>
+                    <argument name="path" xsi:type="string">onepage/layout/onepage</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

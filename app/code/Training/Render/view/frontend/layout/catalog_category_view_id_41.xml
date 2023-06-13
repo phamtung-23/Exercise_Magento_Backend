@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+        
+           <block class="Training\Render\Block\BlockContentTop"
+                   name="custom.block.content.top"
+                   template="Training_Render::custom_content_top.phtml">
+                <arguments>
+                    <argument name="background_color" xsi:type="string">red</argument>
+                </arguments>       
+            </block>
+
+            <block class="Training\Render\Block\BlockContentTop"
+                   name="custom.block.content.category"
+                   template="Training_Render::custom_content_category.phtml">     
+            </block>
+
+        </referenceContainer>
+    </body>
+</page>
