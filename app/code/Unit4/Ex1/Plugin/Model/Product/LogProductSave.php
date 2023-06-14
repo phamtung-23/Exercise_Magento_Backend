@@ -23,11 +23,17 @@ class LogProductSave
 
     public function beforeSave( Product $subject, DataObject $object) 
     {
-       $result = array_udiff_assoc($object->getData(), $object->getOrigData(),
-           function ($x,$y){
-                return ($x === $y)? 0 : 1;
-             }
-           );
-        $this->logger->debug(json_encode($result));
+        // dd($object->getOrigData());
+        if ($object->getOrigData() === null){
+            $this->logger->debug(json_encode($object->getData()));
+        }else{
+            $result = array_udiff_assoc($object->getData(), $object->getOrigData(),
+                function ($x,$y){
+                     return ($x === $y)? 0 : 1;
+                 }
+         
+             );
+            $this->logger->debug(json_encode($result));
+        }
     }
 }
