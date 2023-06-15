@@ -8,9 +8,10 @@ use Magento\Eav\Model\Entity\Attribute\SetFactory as AttributeSetFactory;
 use Magento\Eav\Model\Config;
 use Magento\Customer\Model\ResourceModel\Attribute;
 use Magento\Customer\Model\Customer;
+use Magento\Framework\Setup\InstallDataInterface;
 
 
-class InstallData implements \Magento\Framework\Setup\InstallDataInterface
+class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
 
@@ -67,7 +68,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
         $attribute->setData('attribute_group_id', $attributeGroupId);
 
         $this->attributeResoure->save($attribute);
-        
+
         $setup->endSetup();
 
     }

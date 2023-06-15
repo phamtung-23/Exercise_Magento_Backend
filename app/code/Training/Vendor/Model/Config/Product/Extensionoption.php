@@ -11,9 +11,9 @@ class Extensionoption extends AbstractSource{
     {
         $this->_options = [];
         
-        $this->_options[] = ['label' => 'Vegan Friendly', 'value' => 'vegan'];
+        $this->_options[] = ['label' => 'Make in Viet Nam', 'value' => 'madeinvietnam'];
         $this->_options[] = ['label' => 'Made in UK', 'value' => 'madeinuk'];
-        $this->_options[] = ['label' => 'Eco Friendly', 'value' => 'eco'];
+        $this->_options[] = ['label' => 'Make in China', 'value' => 'madeinchina'];
     
     
         return $this->_options;
