@@ -10,7 +10,6 @@ use Magento\Customer\Model\ResourceModel\Attribute;
 use Magento\Customer\Model\Customer;
 use Magento\Framework\Setup\InstallDataInterface;
 
-
 class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
@@ -19,13 +18,11 @@ class InstallData implements InstallDataInterface
 
     private $attributeResoure;
 
-
     public function __construct(EavSetupFactory $eavSetupFactory, Config $eavConfig, Attribute $attributeResoure) 
     {
         $this->eavSetupFactory = $eavSetupFactory;
         $this->eavConfig = $eavConfig;
         $this->attributeResoure = $attributeResoure;
-
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -36,7 +33,6 @@ class InstallData implements InstallDataInterface
         $attributeSetId = $eavSetup->getDefaultAttributeSetId(Customer::ENTITY);
         $attributeGroupId = $eavSetup->getDefaultAttributeGroupId(Customer::ENTITY);
 
-        // Create a new attribute
         $eavSetup->addAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
             'input_text_attribute',
@@ -51,15 +47,6 @@ class InstallData implements InstallDataInterface
                 'used_in_product_listing' => true,
                 'backend' => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
                 'visible_on_front' => true,
-
-                // 'visible' => true,
-                // 'user_defined' => true,
-                // 'default' => '',
-                // 'searchable' => false,
-                // 'filterable' => false,
-                // 'comparable' => false,
-                // 'used_in_product_listing' => true,
-                // 'unique' => false,
             ]
         );
 
@@ -70,6 +57,5 @@ class InstallData implements InstallDataInterface
         $this->attributeResoure->save($attribute);
 
         $setup->endSetup();
-
     }
 }

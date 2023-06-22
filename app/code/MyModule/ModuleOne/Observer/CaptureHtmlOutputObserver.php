@@ -19,7 +19,6 @@ class CaptureHtmlOutputObserver implements ObserverInterface
         $response = $observer->getData('response');
         $body = $response->getBody();
 
-        // Log the captured HTML
         $this->_logger->info($body);
     }
 }

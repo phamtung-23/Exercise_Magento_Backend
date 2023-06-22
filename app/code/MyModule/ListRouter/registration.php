@@ -4,6 +4,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'MyModule_ModuleThree',
+    'MyModule_ListRouter',
     __DIR__
 );

@@ -1,28 +1,38 @@
 <?php
-// File: app/code/VendorName/ModuleName/Controller/HelloWorld.php
-
 namespace MyModule\ModuleHelloWorld\Controller\Index;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\View\Result\PageFactory;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Catalog\Model\CategoryRepository;
 
 class Index extends Action
 {
-    protected $resultPageFactory;
-
-    public function __construct(Context $context, PageFactory $resultPageFactory)
-    {
-        $this->resultPageFactory = $resultPageFactory;
+    protected $resultFactory;
+    protected $productRepository;
+    protected $urlInterface;
+    protected $categoryRepository;
+    public function __construct(
+        Context $context,
+        ResultFactory $resultFactory,
+        CategoryRepository $categoryRepository
+    ) {
+        $this->resultFactory = $resultFactory;
+        $this->categoryRepository = $categoryRepository;
         parent::__construct($context);
     }
 
     public function execute()
     {
-        // $this->getResponse()->appendBody("HELLO WORLD");
-        // dd($this->getRequest());
-
-        $this->_redirect('catalog/product/view/id/2061');
-
+        try {
+            $categoryId = 42;
+            $category = $this->categoryRepository->get($categoryId);
+            $url = $category->getUrl();
+            $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setUrl($url);
+            return $resultRedirect;
+        } catch (\Exception $e) {
+            echo 'Category does not exist!!';
+        }
     }
 }

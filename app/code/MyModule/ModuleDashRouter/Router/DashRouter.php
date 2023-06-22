@@ -1,36 +1,24 @@
 <?php 
-
 namespace MyModule\ModuleDashRouter\Router;
 
-use Magento\Framework\App\Router\Base;
+use Magento\Framework\App\ActionFactory;
+use Magento\Framework\App\RequestInterface;
+use \Magento\Framework\App\RouterInterface;
 
-class DashRouter extends Base
-{
-    protected function parseRequest(\Magento\Framework\App\RequestInterface $request){
-        $output = parent::parseRequest($request);
+class DashRouter implements RouterInterface
+{  
+    protected $actionFactory;
 
-        // dd($output);
-
-        // $output['actionPath'] = isset($output['actionPath'])
-        // ? str_replace('-', 'dash', $output['actionPath'])
-        // : null;
-
-        // $output['actionName'] = isset($output['actionName'])
-        // ? str_replace('-', 'dash', $output['actionName'])
-        // : null;
-        $path = trim($request->getPathInfo(), '/');
-
-        $params = explode('-', strlen($path) ? $path : $this->pathConfig->getDefaultPath());
- 
-        foreach ($this->_requiredParams as $paramName) {
-            $output[$paramName] = array_shift($params);
+    public function __construct(ActionFactory $actionFactory)
+    {
+        $this->actionFactory = $actionFactory;
+    }
+    public function match(RequestInterface $request)
+    {
+        $info = $request->getPathInfo();
+        if (preg_match("%^/(.*?)-(.*?)-(.*?)$%", $info, $m)) {
+            $request->setPathInfo(sprintf("/%s/%s/%s", $m[1], $m[2], $m[3]));
+           return $this->actionFactory->create('Magento\Framework\App\Action\Forward',['request' => $request]);
         }
-
-        for ($i = 0, $l = count($params); $i < $l; $i += 2) {
-            $output['variables'][$params[$i]] = isset($params[$i + 1]) ? urldecode($params[$i + 1]) : '';
-        }
-        // dd($output);
-
-        return $output;
     }
 }

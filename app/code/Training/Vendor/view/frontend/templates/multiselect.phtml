@@ -1,23 +1,25 @@
 <?php $product = $block->getProduct()?>
 <div>
-    <h3>Product origin:</h3>
-    <?php $data = explode(',', $block->getProductMultiselect());
-        $flags = array('madeinvietnam'=>"https://cdn-icons-png.flaticon.com/512/323/323319.png",
-                        'madeinuk'=>'https://cdn-icons-png.flaticon.com/512/197/197374.png',
-                        'madeinchina'=>'https://icons.iconarchive.com/icons/wikipedia/flags/512/CN-China-Flag-icon.png')
-    ?>
-    <?php if(count($data) && !empty($data[0])):?>
-        <ul style="display:flex; list-style-type:none; padding-left:0px;">
-            <?php foreach($data as $value): ?>
-                <?php $attr = $product->getResource()->getAttribute('Multiselect_product_origin_attribute'); ?>
-                <?php if($attr->usesSource()): ?>
-                    <?php $option_value = $attr->getSource()->getOptionText($value); ?>
-                    <li style="padding-left: 10px; display:flex; justify-content:center; align-items:center;">
-                        <img width="30" src="<?=$flags[$value]?>" alt="">
-                        <p style="padding-left: 5px; margin:0px;"><?=$option_value?></p>
-                    </li>
-                <?php endif?>
-            <?php endforeach?>
-        </ul>
+    <?php if($block->getProductMultiselect() != null):?>
+        <h3>Product origin:</h3>
+        <?php $data = explode(',', $block->getProductMultiselect());
+            $flags = array('madeinvietnam'=>"https://cdn-icons-png.flaticon.com/512/323/323319.png",
+                            'madeinuk'=>'https://cdn-icons-png.flaticon.com/512/197/197374.png',
+                            'madeinchina'=>'https://icons.iconarchive.com/icons/wikipedia/flags/512/CN-China-Flag-icon.png')
+        ?>
+        <?php if(count($data) && !empty($data[0])):?>
+            <ul style="display:flex; list-style-type:none; padding-left:0px;">
+                <?php foreach($data as $value): ?>
+                    <?php $attr = $product->getResource()->getAttribute('Multiselect_product_origin_attribute'); ?>
+                    <?php if($attr->usesSource()): ?>
+                        <?php $option_value = $attr->getSource()->getOptionText($value); ?>
+                        <li style="padding-left: 10px; display:flex; justify-content:center; align-items:center;">
+                            <img width="30" src="<?=$flags[$value]?>" alt="">
+                            <p style="padding-left: 5px; margin:0px;"><?=$option_value?></p>
+                        </li>
+                    <?php endif?>
+                <?php endforeach?>
+            </ul>
+        <?php endif;?>
     <?php endif;?>
 </div>
