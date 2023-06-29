@@ -1,25 +1,21 @@
 <?php
-namespace Unit5\ListProduct\Controller\Index;
+namespace Unit5\ListCustomer\Controller\Index;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-
-use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Catalog\Api\Data\ProductInterface;
-
+use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use  Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\Api\Search\FilterGroup;
 
-use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
-
 class Index extends Action
 {
     /**
-     * @var ProductRepositoryInterface
+     * @var CustomerRepositoryInterface
      */
-    private $productRepo;
+    private $customerRepo;
 
     /**
      * @var SearchCriteriaBuilder
@@ -43,13 +39,13 @@ class Index extends Action
 
     public function __construct(
         Context $context,
-        ProductRepositoryInterface $productRepo,
+        CustomerRepositoryInterface $customerRepo,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         FilterBuilder $filterBuilder,
         SortOrderBuilder $sortOrderBuilder,
         FilterGroup $filterGroup
     ) {
-        $this->productRepo = $productRepo;
+        $this->customerRepo = $customerRepo;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterBuilder = $filterBuilder;
         $this->sortOrderBuilder = $sortOrderBuilder;
@@ -60,37 +56,35 @@ class Index extends Action
     public function execute()
     {
         $filter1 = $this->filterBuilder
-            ->setField(ProductInterface::TYPE_ID)
-            ->setConditionType('eq')
-            ->setValue(Configurable::TYPE_CODE)
+            ->setField(CustomerInterface::FIRSTNAME)
+            ->setConditionType('like')
+            ->setValue('P%')
             ->create();
 
         $filter2 = $this->filterBuilder
-            ->setField(ProductInterface::NAME)
+            ->setField(CustomerInterface::EMAIL)
             ->setConditionType('like')
-            ->setValue('B%')
+            ->setValue('r%')
             ->create();
 
         $sortOrder = $this->sortOrderBuilder
-            ->setField('entity_id')
-            ->setDescendingDirection()
+            ->setField('id')
+            ->setAscendingDirection()
             ->create();
 
-        $this->searchCriteriaBuilder->addFilters([$filter1]);
-        $this->searchCriteriaBuilder->addFilters([$filter2]);
+        $this->searchCriteriaBuilder->addFilters([$filter1, $filter2]);
         
         $this->searchCriteriaBuilder
-            ->setSortOrders([$sortOrder])
-            ->setPageSize(6)
-            ->setCurrentPage(1);
+            ->setSortOrders([$sortOrder]);
 
         $searchCriteria = $this->searchCriteriaBuilder->create();
 
-        $productsItems  = $this->productRepo->getList($searchCriteria)->getItems();
+        $customerItems  = $this->customerRepo->getList($searchCriteria)->getItems();
 
-        foreach ($productsItems as $productItem){
-            echo "Type: ".$productItem->getTypeId().", ID: ".$productItem->getID()
-                    .", Name: ".$productItem->getName().", SKU: ".$productItem->getSku()."</br>";
+        foreach ($customerItems as $customerItem){
+            echo "ID: ".$customerItem->getID()
+                    .", Email: ".$customerItem->getEmail()
+                    .", Name: ".$customerItem->getFirstname()." ".$customerItem->getLastname()."</br>";
         }
     }
 }

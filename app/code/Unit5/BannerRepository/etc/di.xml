@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Unit5\BannerRepository\Api\Data\BannerInterface"
+                type="Unit5\BannerRepository\Model\Banner"/>
+    <preference for="Unit5\BannerRepository\Api\BannerRepositoryInterface"
+                type="Unit5\BannerRepository\Model\BannerRepository"/>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Unit5\BannerRepository\Api\Data\BannerInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">banner_entity</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>
